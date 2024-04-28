@@ -1,0 +1,9 @@
+.husky/
+.vscode/
+node_modules/
+res/
+src/
+.eslintrc.json
+.prettierignore
+.prettierrc
+tsconfig.json

@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "strict": false,
+        // "esModuleInterop": true,
+        // "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        // "checkJs": true,
+        "allowJs": true,
+        "declaration": true,
+        // "declarationMap": false,
+        // "allowSyntheticDefaultImports": true,
+        // "lib": ["ES2022", "DOM"],
+        "target": "ES6",
+        "module": "ES6",
+        // "moduleResolution": "NodeNext",
+        "baseUrl": ".",
+        // "outDir": "dist/es",
+        // "noEmitHelpers": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node16",
+        "paths": {}
+    },
+    "include": ["src/**/*.ts", "src/vendor/**/*.js"],
+    "exclude": ["node_modules/**/*.ts"]
+}
