@@ -1,4 +1,18 @@
 const rule = new RegExp('^[a-z0-9]{4,}$');
+
+function isAlphaNumeric(code) {
+	if (
+		!(code > 47 && code < 58) && // numeric (0-9)
+		//!(code > 64 && code < 91) && // upper alpha (A-Z)
+		!(code > 96 && code < 123)
+	) {
+		// lower alpha (a-z)
+		return false;
+	}
+
+	return true;
+}
+
 export function getTerminusNameFromVC(type: string, name: string): string {
 	if (type == 'Google') {
 		const s = name.split('@');
@@ -12,7 +26,13 @@ export function getTerminusNameFromVC(type: string, name: string): string {
 		) {
 			return undefined;
 		}
-		const n = s[0].toLocaleLowerCase();
+		let n = '';
+		const tempN = s[0].toLocaleLowerCase();
+		for (let i = 0; i < tempN.length; i++) {
+			if (isAlphaNumeric(tempN.charCodeAt(i))) {
+				n += tempN[i];
+			}
+		}
 		if (!rule.test(n)) {
 			return undefined;
 		}
