@@ -1,4 +1,4 @@
-# Terminus License 
+# Terminus License
 
 ## Acceptance
 
