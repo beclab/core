@@ -19,11 +19,7 @@ export function getTerminusNameFromVC(type: string, name: string): string {
 		if (s.length != 2) {
 			return undefined;
 		}
-		if (
-			s[1] != 'gmail.com' &&
-			s[1] != 'bytetrade.io' &&
-			s[1] != 'bytetradelab.io'
-		) {
+		if (s[1] != 'gmail.com') {
 			return undefined;
 		}
 		let n = '';
