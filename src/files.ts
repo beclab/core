@@ -1,12 +1,12 @@
 
-export function getFileIcon(fileName: string) {
+export function getFileIcon(fileName: string): string {
 	let suffix = '';
 	let result: string | undefined = '';
 	if (fileName) {
 		const fileArr = fileName.split('.');
 		suffix = fileArr[fileArr.length - 1];
 	}
-	if (!suffix) return false;
+	if (!suffix) return 'other';
 	suffix = suffix.toLocaleLowerCase();
 
 	const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
@@ -58,14 +58,14 @@ export function getFileIcon(fileName: string) {
 	return 'other';
 }
 
-export function getFileType(fileName: string) {
+export function getFileType(fileName: string): string {
 	let suffix = '';
 	let result: string | undefined = '';
 	if (fileName) {
 		const fileArr = fileName.split('.');
 		suffix = fileArr[fileArr.length - 1];
 	}
-	if (!suffix) return false;
+	if (!suffix) return 'blob';
 	suffix = suffix.toLocaleLowerCase();
 
 	const docList = ['doc'];
