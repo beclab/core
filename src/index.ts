@@ -15,3 +15,5 @@ export * from './websocket';
 export * from './secret';
 export * from './device';
 export * from './app';
+export * from './files';
+
