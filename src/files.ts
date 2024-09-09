@@ -13,7 +13,7 @@ export function getFileIcon(fileName: string): string {
 	result = imgList.find((item) => item === suffix);
 	if (result) return 'image';
 	// txt
-	const txtList = ['txt'];
+	const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
 	result = txtList.find((item) => item === suffix);
 	if (result) return 'txt';
 	// excel
@@ -136,7 +136,7 @@ export function getFileType(fileName: string): string {
 	result = tiffList.find((item) => item === suffix);
   if (result) return 'tiff';
   
-  const txtList = ['txt'];
+  const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
 	result = txtList.find((item) => item === suffix);
   if (result) return 'txt';
   
