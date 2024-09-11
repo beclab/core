@@ -70,131 +70,131 @@ export function getFileType(fileName: string): string {
 
 	const docList = ['doc'];
 	result = docList.find((item) => item === suffix);
-	if (result) return 'doc';
+	if (result) return 'DOC';
 
   const docxList = ['docx'];
 	result = docxList.find((item) => item === suffix);
-  if (result) return 'docx';
+  if (result) return 'DOCX';
   
   const odtList = ['odt'];
 	result = odtList.find((item) => item === suffix);
-  if (result) return 'odt';
+  if (result) return 'ODT';
   
   const pagesList = ['pages'];
 	result = pagesList.find((item) => item === suffix);
-	if (result) return 'pages';
+	if (result) return 'PAGES';
 
   const pdfList = ['pdf'];
 	result = pdfList.find((item) => item === suffix);
-	if (result) return 'pdf';
+	if (result) return 'PDF';
 
   const pptList = ['ppt', 'pptx'];
 	result = pptList.find((item) => item === suffix);
-	if (result) return 'ppt';
+	if (result) return 'PPT';
 
   const xlsList = ['xls', 'xlsx'];
 	result = xlsList.find((item) => item === suffix);
-	if (result) return 'xlsx';
+	if (result) return 'XLSX';
 
   const rftList = ['rft'];
 	result = rftList.find((item) => item === suffix);
-	if (result) return 'rft';
+	if (result) return 'RFT';
 
   const xmlList = ['xml'];
 	result = xmlList.find((item) => item === suffix);
-	if (result) return 'xml';
+	if (result) return 'XML';
 
   const htmlList = ['xhtml', 'html', 'htm'];
 	result = htmlList.find((item) => item === suffix);
-	if (result) return 'html';
+	if (result) return 'HTML';
 
   const jpgList = ['jpg', 'jpeg', 'jpe', 'jfif', 'jfif-tbnl'];
 	result = jpgList.find((item) => item === suffix);
-	if (result) return 'jpeg';
+	if (result) return 'JPEG';
 
   const pngList = ['png'];
 	result = pngList.find((item) => item === suffix);
-	if (result) return 'png';
+	if (result) return 'PNG';
 
   const gifList = ['gif'];
 	result = gifList.find((item) => item === suffix);
-	if (result) return 'gif';
+	if (result) return 'GIF';
 
   const bmpList = ['bmp'];
 	result = bmpList.find((item) => item === suffix);
-	if (result) return 'bmp';
+	if (result) return 'BMP';
 
   const svgList = ['svg'];
 	result = svgList.find((item) => item === suffix);
-	if (result) return 'svg';
+	if (result) return 'SVG';
 
   const webpList = ['webp'];
 	result = webpList.find((item) => item === suffix);
-	if (result) return 'webp';
+	if (result) return 'WEBP';
 
   const tiffList = ['tif', 'tiff'];
 	result = tiffList.find((item) => item === suffix);
-  if (result) return 'tiff';
+  if (result) return 'TIFF';
   
   const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
 	result = txtList.find((item) => item === suffix);
-  if (result) return 'txt';
+  if (result) return 'TXT';
   
   const cssList = ['css', 'scss', 'sass', 'less', 'style'];
 	result = cssList.find((item) => item === suffix);
-  if (result) return 'css';
+  if (result) return 'CSS';
   
   const jsList = ['js', 'ts'];
 	result = jsList.find((item) => item === suffix);
-  if (result) return 'js';
+  if (result) return 'JS';
   
   const jsonList = ['json'];
 	result = jsonList.find((item) => item === suffix);
-  if (result) return 'json';
+  if (result) return 'JSON';
   
   const zipList = ['zip'];
 	result = zipList.find((item) => item === suffix);
-	if (result) return 'zip';
+	if (result) return 'ZIP';
 
   const rarList = ['rar'];
 	result = rarList.find((item) => item === suffix);
-	if (result) return 'rar';
+	if (result) return 'RAR';
 
   const zip7List = ['7z'];
 	result = zip7List.find((item) => item === suffix);
-  if (result) return '7-zip';
+  if (result) return '7-ZIP';
   
   const tarList = ['tar'];
 	result = tarList.find((item) => item === suffix);
-  if (result) return 'tar';
+  if (result) return 'TAR';
   
   const gzList = ['gz'];
 	result = gzList.find((item) => item === suffix);
-  if (result) return 'gzip';
+  if (result) return 'GZIP';
   
   const bz2List = ['bz2'];
 	result = bz2List.find((item) => item === suffix);
-	if (result) return 'bzip2';
+	if (result) return 'BZIP2';
 
   const mp3List = ['mp3'];
 	result = mp3List.find((item) => item === suffix);
-  if (result) return 'mp3';
+  if (result) return 'MP3';
   
   const wavList = ['wav'];
 	result = wavList.find((item) => item === suffix);
-  if (result) return 'wav';
+  if (result) return 'WAV';
   
   const aacList = ['aac'];
 	result = aacList.find((item) => item === suffix);
-  if (result) return 'aac';
+  if (result) return 'AAC';
   
   const mp4List = ['mp4', 'm4v'];
 	result = mp4List.find((item) => item === suffix);
-  if (result) return 'mp4';
+  if (result) return 'MP4';
   
   const aviList = ['avi', 'mov', 'webp'];
 	result = aviList.find((item) => item === suffix);
-	if (result) return 'video';
+	if (result) return 'VIDEO';
 
 	return 'blob';
 }
