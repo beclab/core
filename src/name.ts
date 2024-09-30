@@ -19,9 +19,9 @@ export function getTerminusNameFromVC(type: string, name: string): string {
 		if (s.length != 2) {
 			return undefined;
 		}
-		if (s[1] != 'gmail.com') {
-			return undefined;
-		}
+		// if (s[1] != 'gmail.com') {
+		// 	return undefined;
+		// }
 		let n = '';
 		const tempN = s[0].toLocaleLowerCase();
 		for (let i = 0; i < tempN.length; i++) {
