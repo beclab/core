@@ -7,6 +7,9 @@ export interface TerminusEntrance {
 	authLevel: string;
 	invisible?: boolean;
 	openMethod: string;
+	state: string;
+	reason?: string;
+	message?: string;
 }
 
 export interface TerminusApp {
