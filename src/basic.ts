@@ -8,7 +8,7 @@ export interface TerminusInfo {
 	loginBackground: string;
 	terminusId: string;
 	did: string;
-    terminusd: string;
+	terminusd: string;
 }
 
 export const DefaultTerminusInfo: TerminusInfo = {
@@ -21,7 +21,7 @@ export const DefaultTerminusInfo: TerminusInfo = {
 	loginBackground: '',
 	terminusId: '',
 	did: '',
-    terminusd: '0'
+	terminusd: '0'
 };
 
-export const TerminusDefaultDomain = 'myterminus.com';
+export const TerminusDefaultDomain = 'olares.com';

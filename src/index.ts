@@ -16,4 +16,4 @@ export * from './secret';
 export * from './device';
 export * from './app';
 export * from './files';
-
+export * from './integration';
