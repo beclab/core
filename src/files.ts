@@ -13,9 +13,13 @@ export function getFileIcon(fileName: string): string {
 	result = imgList.find((item) => item === suffix);
 	if (result) return 'image';
 	// txt
-	const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3', 'epub'];
+	const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
 	result = txtList.find((item) => item === suffix);
 	if (result) return 'txt';
+	// epub
+	const epubList = ['epub'];
+	result = epubList.find((item) => item === suffix);
+	if (result) return 'epub';
 	// excel
 	const excelList = ['xls', 'xlsx'];
 	result = excelList.find((item) => item === suffix);
@@ -142,7 +146,11 @@ export function getFileType(fileName: string): string {
   
   const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3', 'epub'];
 	result = txtList.find((item) => item === suffix);
-  if (result) return 'TXT';
+	if (result) return 'TXT';
+	
+	const epubList = ['epub'];
+	result = epubList.find((item) => item === suffix);
+  if (result) return 'EPUB';
   
   const cssList = ['css', 'scss', 'sass', 'less', 'style'];
 	result = cssList.find((item) => item === suffix);
