@@ -9,11 +9,11 @@ export function getFileIcon(fileName: string): string {
 	if (!suffix) return 'other';
 	suffix = suffix.toLocaleLowerCase();
 
-	const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
+	const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'heic'];
 	result = imgList.find((item) => item === suffix);
 	if (result) return 'image';
 	// txt
-	const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
+	const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3', 'epub'];
 	result = txtList.find((item) => item === suffix);
 	if (result) return 'txt';
 	// excel
@@ -46,12 +46,12 @@ export function getFileIcon(fileName: string): string {
 		'avi',
 		'flv',
 		'mov',
-		'm4v'
+		'm4v',
 	];
 	result = videoList.find((item) => item === suffix);
 	if (result) return 'video';
 	// audio
-	const audioList = ['mp3', 'wav', 'wmv'];
+	const audioList = ['mp3', 'wav', 'm4a'];
 	result = audioList.find((item) => item === suffix);
 	if (result) return 'audio';
 	// other
@@ -132,11 +132,15 @@ export function getFileType(fileName: string): string {
 	result = webpList.find((item) => item === suffix);
 	if (result) return 'WEBP';
 
+	const heicList = ['heic'];
+	result = heicList.find((item) => item === suffix);
+	if (result) return 'HEIC';
+
   const tiffList = ['tif', 'tiff'];
 	result = tiffList.find((item) => item === suffix);
   if (result) return 'TIFF';
   
-  const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
+  const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3', 'epub'];
 	result = txtList.find((item) => item === suffix);
   if (result) return 'TXT';
   
@@ -178,7 +182,11 @@ export function getFileType(fileName: string): string {
 
   const mp3List = ['mp3'];
 	result = mp3List.find((item) => item === suffix);
-  if (result) return 'MP3';
+	if (result) return 'MP3';
+	
+	const m4aList = ['m4a'];
+	result = m4aList.find((item) => item === suffix);
+  if (result) return 'M4A';
   
   const wavList = ['wav'];
 	result = wavList.find((item) => item === suffix);
@@ -190,9 +198,9 @@ export function getFileType(fileName: string): string {
   
   const mp4List = ['mp4', 'm4v'];
 	result = mp4List.find((item) => item === suffix);
-  if (result) return 'MP4';
-  
-  const aviList = ['avi', 'mov', 'webp'];
+	if (result) return 'MP4';
+	
+  const aviList = ['avi', 'mov', 'webp', 'wmv', 'm2v', 'mkv', 'rmvb', 'flv'];
 	result = aviList.find((item) => item === suffix);
 	if (result) return 'VIDEO';
 
