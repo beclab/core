@@ -9,7 +9,7 @@ export function getFileIcon(fileName: string): string {
 	if (!suffix) return 'other';
 	suffix = suffix.toLocaleLowerCase();
 
-	const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'heic'];
+	const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'heic', 'webp', 'svg'];
 	result = imgList.find((item) => item === suffix);
 	if (result) return 'image';
 	// txt
@@ -208,7 +208,7 @@ export function getFileType(fileName: string): string {
 	result = mp4List.find((item) => item === suffix);
 	if (result) return 'MP4';
 	
-  const aviList = ['avi', 'mov', 'webp', 'wmv', 'm2v', 'mkv', 'rmvb', 'flv'];
+  const aviList = ['avi', 'mov', 'wmv', 'm2v', 'mkv', 'rmvb', 'flv'];
 	result = aviList.find((item) => item === suffix);
 	if (result) return 'VIDEO';
 
