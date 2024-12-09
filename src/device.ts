@@ -30,7 +30,7 @@ export class TermiPassDeviceInfo {
 	lastSeenTime = 0;
 	lastIp = '';
 	lastIpLocation = '';
-	client_type: 'termiPass' | 'desktop' | '' = 'desktop';
+	client_type: 'larePass' | 'desktop' | '' = 'desktop';
 	firebase_token = '';
 
 	constructor(props?: Partial<TermiPassDeviceInfo>) {
