@@ -12,6 +12,14 @@ export interface TerminusEntrance {
 	message?: string;
 }
 
+export interface TerminusPorts {
+	name: string;
+	host: string;
+	port: string;
+	exposePort: string;
+	protocol: string;
+}
+
 export interface TerminusApp {
 	id: string;
 	icon: string;
@@ -26,4 +34,5 @@ export interface TerminusApp {
 	state: string;
 	deployment?: string;
 	entrances: TerminusEntrance[];
+	ports: TerminusPorts[];
 }
