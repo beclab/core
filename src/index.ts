@@ -17,3 +17,4 @@ export * from './device';
 export * from './app';
 export * from './files';
 export * from './integration';
+export * from './resize';
