@@ -1,5 +1,11 @@
-let mobileChangeCallback:
-	| ((state: { isMobile: boolean; isVerticalScreen: boolean }) => void)
+export enum DeviceType {
+	MOBILE = 'mobile',
+	TABLET = 'tablet',
+	DESKTOP = 'desktop'
+}
+
+let deviceChangeCallback:
+	| ((state: { device: DeviceType; isVerticalScreen: boolean }) => void)
 	| null = null;
 
 const MOBILE_KEYWORDS = [
@@ -24,8 +30,8 @@ const MOBILE_KEYWORDS = [
 	'windows phone'
 ];
 
-export function useMobile(): {
-	state: { isMobile: boolean; isVerticalScreen: boolean };
+export function useDevice(): {
+	state: { device: DeviceType; isVerticalScreen: boolean };
 	cleanup: () => void;
 } {
 	let state = getScreenState();
@@ -33,12 +39,12 @@ export function useMobile(): {
 	const resizeHandler = () => {
 		const newState = getScreenState();
 		if (
-			newState.isMobile !== state.isMobile ||
+			newState.device !== state.device ||
 			newState.isVerticalScreen !== state.isVerticalScreen
 		) {
 			state = newState;
-			if (mobileChangeCallback) {
-				mobileChangeCallback(state);
+			if (deviceChangeCallback) {
+				deviceChangeCallback(state);
 			}
 		}
 	};
@@ -52,15 +58,21 @@ export function useMobile(): {
 	return { state, cleanup };
 }
 
-function getScreenState(): { isMobile: boolean; isVerticalScreen: boolean } {
-	const isMobile = mobileCheckout();
+function getScreenState(): { device: DeviceType; isVerticalScreen: boolean } {
+	const device = detectDevice();
 	const isVerticalScreen = window.innerHeight > window.innerWidth;
-	return { isMobile, isVerticalScreen };
+	return { device, isVerticalScreen };
 }
 
-function mobileCheckout(): boolean {
+function detectDevice(): DeviceType {
 	if (isDesktop()) {
-		return false;
+		const isTouchDevice =
+			'ontouchstart' in window || navigator.maxTouchPoints > 0;
+		if (isTouchDevice) {
+			return DeviceType.TABLET;
+		}
+
+		return DeviceType.DESKTOP;
 	}
 
 	const ratio =
@@ -69,9 +81,9 @@ function mobileCheckout(): boolean {
 			: screen.width / screen.height;
 
 	if (ratio >= 1.3 && ratio <= 1.6) {
-		return false;
+		return DeviceType.TABLET;
 	}
-	return true;
+	return DeviceType.MOBILE;
 }
 
 function isDesktop(): boolean {
@@ -85,8 +97,8 @@ function isDesktop(): boolean {
 	return true;
 }
 
-export function onMobileChange(
-	callback: (state: { isMobile: boolean; isVerticalScreen: boolean }) => void
+export function onDeviceChange(
+	callback: (state: { device: DeviceType; isVerticalScreen: boolean }) => void
 ) {
-	mobileChangeCallback = callback;
+	deviceChangeCallback = callback;
 }
