@@ -35,6 +35,7 @@ export function useDevice(): {
 	cleanup: () => void;
 } {
 	let state = getScreenState();
+	const mediaOrientation = window.matchMedia('(orientation: landscape)');
 
 	const resizeHandler = () => {
 		const newState = getScreenState();
@@ -50,9 +51,11 @@ export function useDevice(): {
 	};
 
 	window.addEventListener('resize', resizeHandler);
+	mediaOrientation.addEventListener('change', resizeHandler);
 
 	const cleanup = () => {
 		window.removeEventListener('resize', resizeHandler);
+		mediaOrientation.addEventListener('change', resizeHandler);
 	};
 
 	return { state, cleanup };
@@ -75,6 +78,10 @@ function detectDevice(): DeviceType {
 		return DeviceType.DESKTOP;
 	}
 
+	if (isSamsungDevice()) {
+		return DeviceType.MOBILE;
+	}
+
 	const ratio =
 		screen.height > screen.width
 			? screen.height / screen.width
@@ -83,7 +90,15 @@ function detectDevice(): DeviceType {
 	if (ratio >= 1.3 && ratio <= 1.6) {
 		return DeviceType.TABLET;
 	}
+
 	return DeviceType.MOBILE;
+}
+
+function isSamsungDevice() {
+	const userAgent = navigator.userAgent.toLowerCase();
+	const isAndroid = /android/i.test(userAgent);
+	const isSamsung = /samsung|sm-|gt-/i.test(userAgent);
+	return isAndroid && isSamsung;
 }
 
 function isDesktop(): boolean {
