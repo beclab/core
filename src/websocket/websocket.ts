@@ -35,7 +35,7 @@ export interface IWebSocketBean {
 	 * @param param
 	 * @returns
 	 */
-	start: (param?: IWebSocketBeanParam) => void;
+	start: (param?: IWebSocketBeanParam, restart?: boolean) => void;
 
 	/**
 	 * 发送数据
@@ -133,9 +133,14 @@ export interface IWebSocketBeanParam {
 	needReconnect?: boolean;
 
 	/**
+	 * 重连成功通知
+	 */
+	onReconnectSuccess?: () => Promise<void>;
+
+	/**
 	 * 重连失败通知
 	 */
-	onFailReconnect?: () => void;
+	onReconnectFailure?: () => void;
 
 	//心跳参数列表
 

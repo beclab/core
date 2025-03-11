@@ -1,6 +1,6 @@
 {
     "name": "@bytetrade/core",
-    "version": "0.3.76",
+    "version": "0.3.77",
     "description": "didvault core module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -40,7 +40,8 @@
         "docs": "typedoc --mode modules --out docs",
         "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",
         "prepare": "husky install",
-        "build": "rm -rf dist && tsup"
+        "build": "rm -rf dist && tsup",
+        "build-dev": "npm run build && yalc push"
     },
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": "eslint --cache --fix",

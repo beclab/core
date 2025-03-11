@@ -33,8 +33,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 		this.websocketbean = websocketbean;
 		this.status = websocketbean.param.needReconnect ?? false;
 		this.reconnectMaxNum = this.websocketbean.param.reconnectMaxNum ?? 10;
-		this.reconnectGapTime =
-			this.websocketbean.param.reconnectGapTime ?? 30000;
+		this.reconnectGapTime = this.websocketbean.param.reconnectGapTime ?? 30000;
 	}
 
 	timer: number = null as any;
@@ -46,17 +45,19 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 		if (!this.status) return;
 		if (this.timer !== null) return;
 		this.num = 0;
-		if (this.websocketbean.param.onreconnect)
+		if (this.websocketbean.param.onreconnect) {
 			this.websocketbean.param.onreconnect();
+		}
+		this.tryReconnect();
 		this.timer = setInterval(() => {
 			if (this.num >= this.reconnectMaxNum) {
-				if (this.websocketbean.param.onFailReconnect)
-					this.websocketbean.param.onFailReconnect();
+				if (this.websocketbean.param.onReconnectFailure) {
+					this.websocketbean.param.onReconnectFailure();
+				}
 				this.stop();
 				return;
 			}
-			this.websocketbean.start();
-			this.num++;
+			this.tryReconnect();
 		}, this.reconnectGapTime) as any;
 	};
 
@@ -67,5 +68,10 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 		if (!this.status) return;
 		clearInterval(this.timer);
 		this.timer = null as any;
+	};
+
+	tryReconnect = () => {
+		this.websocketbean.start(undefined, true);
+		this.num++;
 	};
 }
