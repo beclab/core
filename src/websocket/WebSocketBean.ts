@@ -10,7 +10,6 @@ import { WebSocketSend } from './WebSocketSend';
 import { WebSocketStatusEnum } from './WebSocketEnum';
 
 /**
- * https://github.com/a1518079148/tools-vue3/webscoket
  * WebSocket封装类
  * @param 封装了心跳机制 、重连机制
  */
@@ -26,7 +25,7 @@ export class WebSocketBean implements IWebSocketBean {
 		this.param = param;
 	}
 
-	onopen = async () => {
+	onopen = async (restart?: boolean) => {
 		//开启心跳
 		this.heart.start();
 
@@ -35,6 +34,10 @@ export class WebSocketBean implements IWebSocketBean {
 
 		//调用生命周期
 		if (this.param.onopen) await this.param.onopen();
+
+		if (restart && this.param.onReconnectSuccess) {
+			await this.param.onReconnectSuccess();
+		}
 
 		//修改状态为已连接
 		this.status = WebSocketStatusEnum.open;
@@ -59,7 +62,7 @@ export class WebSocketBean implements IWebSocketBean {
 		this.reconnect.start();
 	};
 
-	start = (param?: IWebSocketBeanParam) => {
+	start = (param?: IWebSocketBeanParam, restart = false) => {
 		//如果已经创建先关闭
 		this.close();
 
@@ -74,7 +77,7 @@ export class WebSocketBean implements IWebSocketBean {
 		this.status = WebSocketStatusEnum.load;
 
 		//绑定连接成功事件
-		this.websocket.onopen = this.onopen;
+		this.websocket.onopen = () => this.onopen(restart);
 		//绑定消息接收事件
 		this.websocket.onmessage = this.onmessage;
 		//绑定连接异常事件
@@ -86,8 +89,7 @@ export class WebSocketBean implements IWebSocketBean {
 		this.heart = new WebSocketHeart(this);
 
 		//创建重连，如果存在则跳过
-		if (this.reconnect === null)
-			this.reconnect = new WebSocketReconnect(this);
+		if (this.reconnect === null) this.reconnect = new WebSocketReconnect(this);
 
 		//创建发送数据管理，如果存在则跳过
 		if (this.sendObj === null) this.sendObj = new WebSocketSend(this);
