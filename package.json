@@ -1,6 +1,6 @@
 {
   "name": "@bytetrade/core",
-  "version": "0.3.80",
+  "version": "0.3.81",
   "description": "didvault core module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -8,6 +8,7 @@
   "dependencies": {
     "axios": "0.21.4",
     "chai": "^4.3.7",
+    "crypto-js": "^4.2.0",
     "date-fns": "2.22.1",
     "multiformats": "9.6.4",
     "uuid": "9.0.1",
