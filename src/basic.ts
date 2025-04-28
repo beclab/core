@@ -38,14 +38,18 @@ export const compareOlaresVersion = (version0: string, version1: string) => {
 		const v0ISRc = version0Splits[1].startsWith('rc');
 		const v1ISRc = version1Splits[1].startsWith('rc');
 		if (v0ISRc && v1ISRc) {
-			result.compare =
-				Number(version0Splits[1].replace('rc.', '')) >
-				Number(version1Splits[1].replace('rc.', ''))
-					? 1
-					: -1;
+			if (version0Splits[1] != version1Splits[1]) {
+				result.compare =
+					Number(version0Splits[1].replace('rc.', '')) >
+					Number(version1Splits[1].replace('rc.', ''))
+						? 1
+						: -1;
+			}
 		} else if (!v0ISRc && !v1ISRc) {
-			result.compare =
-				Number(version0Splits[1]) > Number(version1Splits[1]) ? 1 : -1;
+			if (Number(version0Splits[1]) != Number(version1Splits[1])) {
+				result.compare =
+					Number(version0Splits[1]) > Number(version1Splits[1]) ? 1 : -1;
+			}
 		} else {
 			result.compare = v0ISRc ? 1 : -1;
 		}
