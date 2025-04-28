@@ -8,6 +8,7 @@ import { WebSocketHeart } from './WebSocketHeart';
 import { WebSocketReconnect } from './WebSocketReconnect';
 import { WebSocketSend } from './WebSocketSend';
 import { WebSocketStatusEnum } from './WebSocketEnum';
+import { PlatformAdapter } from './platformAdapter';
 
 /**
  * WebSocket封装类
@@ -95,7 +96,7 @@ export class WebSocketBean implements IWebSocketBean {
 		if (this.sendObj === null) this.sendObj = new WebSocketSend(this);
 
 		//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-		window.addEventListener('beforeunload', this.dispose);
+		PlatformAdapter.addEventListener('beforeunload', this.dispose);
 	};
 
 	/**
@@ -120,7 +121,7 @@ export class WebSocketBean implements IWebSocketBean {
 	 */
 	close = () => {
 		if (this.websocket === null) return;
-		window.removeEventListener('beforeunload', this.dispose);
+		PlatformAdapter.removeEventListener('beforeunload', this.dispose);
 		//销毁绑定事件，关闭socket
 		if (this.websocket) {
 			this.websocket.onerror = null;
