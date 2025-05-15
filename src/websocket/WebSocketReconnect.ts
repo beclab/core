@@ -42,7 +42,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 	 * 开始尝试重连
 	 */
 	start = () => {
-		if (!this.status) return;
+		if (!this.status || this.reconnectMaxNum === 0) return;
 		if (this.timer !== null) return;
 		this.num = 0;
 		if (this.websocketbean.param.onreconnect) {
@@ -50,7 +50,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 		}
 		this.tryReconnect();
 		this.timer = setInterval(() => {
-			if (this.num >= this.reconnectMaxNum) {
+			if (this.reconnectMaxNum > 0 && this.num >= this.reconnectMaxNum) {
 				if (this.websocketbean.param.onReconnectFailure) {
 					this.websocketbean.param.onReconnectFailure();
 				}
