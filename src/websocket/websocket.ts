@@ -128,6 +128,21 @@ export interface IWebSocketBeanParam {
 	reconnectGapTime?: number;
 
 	/**
+	 * 重连初始化梯度间隔时间，默认为1000
+	 */
+	gradientReconnectStartTime?: number;
+
+	/**
+	 * 重连梯度最大间隔时间，默认为60000
+	 */
+	gradientReconnectMaxTime?: number;
+
+	/**
+	 * 是否需要重连梯度，默认为true
+	 */
+	isReconnectGradientEnabled?: boolean;
+
+	/**
 	 * 是否需要重连，默认为false
 	 */
 	needReconnect?: boolean;
