@@ -4,7 +4,7 @@ import { WebSocketStatusEnum } from './WebSocketEnum';
 const isObject = (val: any): any => val !== null && typeof val === 'object';
 
 /**
- * WebSocket数据发送管理
+ * WebSocket data sending management
  */
 export class WebSocketSend implements IWebSocketSend {
 	websocketbean: IWebSocketBean;
@@ -19,18 +19,17 @@ export class WebSocketSend implements IWebSocketSend {
 	}
 
 	/**
-	 * 临时发送管理对象
+	 * Temporary sending management object
 	 */
-	sendTemp: { tag: string; data: any; resend: boolean; sendId?: string }[] =
-		[];
+	sendTemp: { tag: string; data: any; resend: boolean; sendId?: string }[] = [];
 
 	/**
-	 * 重新发送id
+	 * Resend ID
 	 */
 	sendId = 1000;
 
 	/**
-	 * 获取重新发送id
+	 * Get resend ID
 	 * @returns
 	 */
 	getSendId = () => {
@@ -39,61 +38,61 @@ export class WebSocketSend implements IWebSocketSend {
 	};
 
 	/**
-	 * 缓存数据标识
+	 * Cache data identifier
 	 */
 	tag = '___senTemp';
 
 	/**
-	 * 重新发送的数据管理
+	 * Resend data management
 	 */
 	sendMap: { [key: string]: any } = {};
 
 	/**
-	 * 发送数据
-	 * @param data 数据对象，Object、Array、String
-	 * @param resend
+	 * Send data
+	 * @param data Data object, Object, Array, or String
+	 * @param resend Whether the data needs to be resent
 	 */
 	send(data: any, resend = false) {
 		if (this.websocketbean.status === WebSocketStatusEnum.open) {
 			let sendId: string = null as any;
 
-			//先判断是不是缓存待发送的数据，如果是取出待发送的数据和状态
+			// First, check if it is cached data to be sent. If so, retrieve the data and resend status.
 			if (isObject(data)) {
 				if (data.tag === this.tag) {
 					resend = data.resend;
-					//如果resend是true，sendId一定存在
+					// If resend is true, sendId must exist
 					if (resend) sendId = data.sendId;
 					data = data.data;
 				}
 			}
 
-			//如果需要重发就保存起来
+			// If the data needs to be resent, save it
 			if (resend) {
 				if (sendId === null) sendId = this.getSendId();
 				this.sendMap[sendId] = data;
 			}
 
-			//判断是不是对象或者数组，转换为字符串
+			// Check if the data is an object or array, then convert it to a string
 			if (isObject(data) || Array.isArray(data)) {
 				data = JSON.stringify(data);
 			}
 
-			//发送数据
+			// Send data
 			this.websocketbean.websocket.send(
 				this.sendPrefix + data + this.sendSuffix
 			);
 
-			//如果是需要重发的返回sendId
+			// If the data needs to be resent, return the sendId
 			return resend ? sendId : true;
 		} else {
 			let sendId: string = null as any;
 
 			if (isObject(data)) {
-				//说明是缓存待发送数据，不做处理
+				// If it is cached data to be sent, do nothing
 				if (data.tag === this.tag) return false;
 			}
 
-			//未连接上时存入临时缓存，连上后发送
+			// If not connected, store in temporary cache and send after connection
 			const sendTempItem: any = {
 				tag: this.tag,
 				data,
@@ -110,7 +109,7 @@ export class WebSocketSend implements IWebSocketSend {
 	}
 
 	/**
-	 * 销毁需要重发的数据信息
+	 * Destroy resend data information
 	 * @param sendId
 	 */
 	offsend = (sendId: string) => {
@@ -119,15 +118,15 @@ export class WebSocketSend implements IWebSocketSend {
 	};
 
 	/**
-	 * 通知连接打开
+	 * Notify when the connection is open
 	 */
 	onopen = () => {
-		//处理重发数据
+		// Process resend data
 		Object.keys(this.sendMap).forEach((key) => {
 			if (this.sendMap[key] !== undefined) this.send(this.sendMap[key]);
 		});
 
-		//处理临时数据
+		// Process temporary data
 		for (let i = this.sendTemp.length - 1; i >= 0; i--) {
 			const item = this.sendTemp[i];
 			const sendStatus = this.send(item);
@@ -141,7 +140,7 @@ export class WebSocketSend implements IWebSocketSend {
 	};
 
 	/**
-	 * 清空所有缓存数据
+	 * Clear all cached data
 	 */
 	clear = () => {
 		this.sendMap = {};

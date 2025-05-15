@@ -11,8 +11,8 @@ import { WebSocketStatusEnum } from './WebSocketEnum';
 import { PlatformAdapter } from './platformAdapter';
 
 /**
- * WebSocket封装类
- * @param 封装了心跳机制 、重连机制
+ * WebSocket encapsulation class
+ * @description Encapsulates heartbeat mechanism and reconnection mechanism
  */
 export class WebSocketBean implements IWebSocketBean {
 	status: WebSocketStatusEnum = null as any;
@@ -27,89 +27,90 @@ export class WebSocketBean implements IWebSocketBean {
 	}
 
 	onopen = async (restart?: boolean) => {
-		//开启心跳
+		// Start heartbeat
 		this.heart.start();
 
-		//通知连接成功或重连成功
+		// Notify connection success or reconnection success
 		this.reconnect.stop();
 
-		//调用生命周期
+		// Call lifecycle method
 		if (this.param.onopen) await this.param.onopen();
 
 		if (restart && this.param.onReconnectSuccess) {
 			await this.param.onReconnectSuccess();
 		}
 
-		//修改状态为已连接
+		// Update status to connected
 		this.status = WebSocketStatusEnum.open;
 
-		//通知发送数据
+		// Notify to send data
 		this.sendObj.onopen();
 	};
 
 	onmessage = (ev: MessageEvent<any>) => {
-		//调用生命周期
+		// Call lifecycle method
 		if (this.param.onmessage) this.param.onmessage(ev);
 
 		this.heart.onmessage(ev.data);
 	};
 
 	onerror = () => {
-		//调用生命周期
+		// Call lifecycle method
 		if (this.param.onerror) this.param.onerror();
-		//销毁对象
+		// Destroy objects
 		this.close();
-		//开始重连
+		// Start reconnection
 		this.reconnect.start();
 	};
 
 	start = (param?: IWebSocketBeanParam, restart = false) => {
-		//如果已经创建先关闭
+		// Close the existing connection if already created
 		this.close();
 
-		//使用新配置或者老配置
+		// Use new configuration or existing configuration
 		if (param) this.param = param;
 		else param = this.param;
 
-		//创建连接
+		// Create connection
 		this.websocket = new WebSocket(param.url);
 
-		//修改状态为加载中
+		// Update status to loading
 		this.status = WebSocketStatusEnum.load;
 
-		//绑定连接成功事件
+		// Bind connection success event
 		this.websocket.onopen = () => this.onopen(restart);
-		//绑定消息接收事件
+		// Bind message receiving event
 		this.websocket.onmessage = this.onmessage;
-		//绑定连接异常事件
+		// Bind connection error event
 		this.websocket.onerror = this.onerror;
-		//绑定连接关闭事件
+		// Bind connection close event
 		this.websocket.onclose = this.onerror;
 
-		//创建心跳
+		// Create heartbeat
 		this.heart = new WebSocketHeart(this);
 
-		//创建重连，如果存在则跳过
+		// Create reconnection object if it doesn't already exist
 		if (this.reconnect === null) this.reconnect = new WebSocketReconnect(this);
 
-		//创建发送数据管理，如果存在则跳过
+		// Create data sending management object if it doesn't already exist
 		if (this.sendObj === null) this.sendObj = new WebSocketSend(this);
 
-		//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+		// Listen for window close event, and actively close the WebSocket connection when the window is closed.
+		// This prevents the server from throwing exceptions when the connection hasn't been closed properly.
 		PlatformAdapter.addEventListener('beforeunload', this.dispose);
 	};
 
 	/**
-	 * 发送数据
-	 * @param data 数据对象，Object、Array、String
-	 * @param resend
+	 * Send data
+	 * @param data Data object, Object, Array, or String
+	 * @param resend Whether to resend the data after reconnecting
 	 */
 	send(data: any, resend = false) {
 		return this.sendObj?.send(data, resend);
 	}
 
 	/**
-	 * 销毁需要重发的数据信息
+	 * Destroy the data that needs to be resent
 	 * @param sendId
 	 */
 	offsend = (sendId: string) => {
@@ -117,12 +118,12 @@ export class WebSocketBean implements IWebSocketBean {
 	};
 
 	/**
-	 * 关闭socket，销毁绑定事件、心跳事件、窗口关闭事件，修改状态为已关闭
+	 * Close WebSocket, destroy binding events, heartbeat events, window close events, and update status to closed
 	 */
 	close = () => {
 		if (this.websocket === null) return;
 		PlatformAdapter.removeEventListener('beforeunload', this.dispose);
-		//销毁绑定事件，关闭socket
+		// Destroy binding events and close WebSocket
 		if (this.websocket) {
 			this.websocket.onerror = null;
 			this.websocket.onmessage = null;
@@ -131,18 +132,18 @@ export class WebSocketBean implements IWebSocketBean {
 			this.websocket.close();
 			this.websocket = null as any;
 		}
-		//销毁心跳事件
+		// Destroy heartbeat events
 		if (this.heart) {
 			this.heart.stop();
 			this.heart = null as any;
 		}
 
-		//修改状态为已关闭
+		// Update status to closed
 		this.status = WebSocketStatusEnum.close;
 	};
 
 	/**
-	 * 销毁所有对象
+	 * Destroy all objects
 	 */
 	dispose = () => {
 		this.close();
