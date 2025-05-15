@@ -1,14 +1,14 @@
 export enum WebSocketStatusEnum {
 	/**
-	 * 创建中
+	 * Loading
 	 */
 	load,
 	/**
-	 * 已连接
+	 * Open
 	 */
 	open,
 	/**
-	 * 已关闭
+	 * Closed
 	 */
 	close
 }

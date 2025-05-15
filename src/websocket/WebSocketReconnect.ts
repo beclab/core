@@ -1,46 +1,46 @@
 import { IWebSocketReconnect, IWebSocketBean } from './websocket';
 
 /**
- * WebSocket重连机制和重连重发数据机制
+ * WebSocket reconnection mechanism and data resending mechanism
  */
 export class WebSocketReconnect implements IWebSocketReconnect {
 	/**
-	 * 开启状态
+	 * Connection status
 	 */
 	status: boolean;
 
 	/**
-	 * WebSocketBean对象
+	 * WebSocketBean object
 	 */
 	websocketbean: IWebSocketBean;
 
 	/**
-	 * 当前重连次数
+	 * Current reconnection attempts
 	 */
 	num = 0;
 
 	/**
-	 * 最大重连次数
+	 * Maximum reconnection attempts
 	 */
 	reconnectMaxNum = 10;
 
 	/**
-	 * 重连间隔时间
+	 * Reconnection interval time
 	 */
 	reconnectGapTime = 30000;
 
 	/**
-	 * 重连初始化梯度间隔时间
+	 * Initial gradient reconnection interval time
 	 */
 	gradientReconnectStartTime = 1000;
 
 	/**
-	 * 重连梯度最大间隔时间
+	 * Maximum gradient reconnection interval time
 	 */
 	gradientReconnectMaxTime = 60000;
 
 	/**
-	 * 是否需要重连梯度
+	 * Whether gradient reconnection is enabled
 	 */
 	isReconnectGradientEnabled = true;
 
@@ -60,7 +60,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 	timer: number = null as any;
 
 	/**
-	 * 开始尝试重连
+	 * Start reconnection attempts
 	 */
 	start = () => {
 		if (!this.status || this.reconnectMaxNum === 0) return;
@@ -73,7 +73,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 	};
 
 	/**
-	 * 停止重连
+	 * Stop reconnection attempts
 	 */
 	stop = () => {
 		if (!this.status) return;
@@ -82,7 +82,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 	};
 
 	/**
-	 *  执行重连
+	 * Perform reconnection
 	 */
 	tryReconnect = () => {
 		this.websocketbean.start(undefined, true);
@@ -90,7 +90,7 @@ export class WebSocketReconnect implements IWebSocketReconnect {
 	};
 
 	/**
-	 *  梯度重连
+	 * Perform gradient reconnection
 	 */
 	scheduleReconnect = () => {
 		if (this.reconnectMaxNum > 0 && this.num >= this.reconnectMaxNum) {

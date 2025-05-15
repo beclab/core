@@ -1,221 +1,221 @@
 import { WebSocketStatusEnum } from './WebSocketEnum';
 export interface IWebSocketBean {
 	/**
-	 * 连接状态
+	 * Connection status
 	 */
 	status: WebSocketStatusEnum;
 
 	/**
-	 * WebSocket对象
+	 * WebSocket object
 	 */
 	websocket: WebSocket;
 
 	/**
-	 * 心跳对象
+	 * Heartbeat object
 	 */
 	heart: IWebSocketHeart;
 
 	/**
-	 * 重连对象
+	 * Reconnection object
 	 */
 	reconnect: IWebSocketReconnect;
 
 	/**
-	 * 发送对象
+	 * Sending object
 	 */
 	sendObj: IWebSocketSend;
 
 	/**
-	 * 参数信息
+	 * Parameter information
 	 */
 	param: IWebSocketBeanParam;
 
 	/**
-	 * 关闭旧连接创建新连接
+	 * Close the old connection and create a new connection
 	 * @param param
 	 * @returns
 	 */
 	start: (param?: IWebSocketBeanParam, restart?: boolean) => void;
 
 	/**
-	 * 发送数据
-	 * @param data 数据对象，Object、Array、String
-	 * @param resend 是否需要在重新连上以后再次发送该数据
+	 * Send data
+	 * @param data Data object, Object, Array, or String
+	 * @param resend Whether to resend the data after reconnecting
 	 */
 	send(data: any, resend?: boolean): string | boolean;
 
 	/**
-	 * 销毁需要重发的数据信息
+	 * Destroy the data that needs to be resent
 	 * @param sendId
 	 */
 	offsend: (sendId: string) => void;
 
 	/**
-	 * 异常操作绑定
+	 * Bind exception handling
 	 */
 	onerror: () => void;
 
 	/**
-	 * 关闭socket，销毁绑定事件、心跳事件、窗口关闭事件，修改状态为已关闭
+	 * Close the WebSocket, destroy binding events, heartbeat events, window close events, and update the status to closed
 	 */
 	close: () => void;
 
 	/**
-	 * 销毁所有对象
+	 * Destroy all objects
 	 */
 	dispose: () => void;
 }
 
 /**
- * 参数信息
+ * Parameter information
  */
 export interface IWebSocketBeanParam {
 	/**
-	 * 连接地址
+	 * Connection URL
 	 */
 	url: string;
 
 	/**
-	 * 发送消息前缀，默认为空
+	 * Prefix for sending messages, default is empty
 	 */
 	sendPrefix?: string;
 
 	/**
-	 * 发送消息后缀，默认为空
+	 * Suffix for sending messages, default is empty
 	 */
 	sendSuffix?: string;
 
 	/**
-	 * 接收消息前缀，默认为空
+	 * Prefix for receiving messages, default is empty
 	 */
 	messagePrefix?: string;
 
 	/**
-	 * 接收消息后缀，默认为空
+	 * Suffix for receiving messages, default is empty
 	 */
 	messageSuffix?: string;
 
 	/**
-	 * 生命周期-在建立连接以后首先调用
+	 * Lifecycle - called first after establishing a connection
 	 */
 	onopen?: () => Promise<any>;
 
 	/**
-	 * 生命周期-在获取到数据以后首先调用
+	 * Lifecycle - called first after receiving data
 	 */
 	onmessage?: (ev: MessageEvent<any>) => any;
 
 	/**
-	 * 生命周期-在关闭或者连接异常以后首先调用
+	 * Lifecycle - called first after closing or encountering a connection exception
 	 */
 	onerror?: () => void;
 
 	/**
-	 * 生命周期-在重连开始以后首先调用
+	 * Lifecycle - called first when reconnection starts
 	 */
 	onreconnect?: () => void;
 
-	//重连参数列表
+	// Reconnection parameter list
 
 	/**
-	 * 最大重连次数，默认为10次
+	 * Maximum number of reconnection attempts, default is 10
 	 */
 	reconnectMaxNum?: number;
 
 	/**
-	 * 重连间隔时间，默认为30000
+	 * Reconnection interval time, default is 30000
 	 */
 	reconnectGapTime?: number;
 
 	/**
-	 * 重连初始化梯度间隔时间，默认为1000
+	 * Initial gradient interval time for reconnection, default is 1000
 	 */
 	gradientReconnectStartTime?: number;
 
 	/**
-	 * 重连梯度最大间隔时间，默认为60000
+	 * Maximum gradient interval time for reconnection, default is 60000
 	 */
 	gradientReconnectMaxTime?: number;
 
 	/**
-	 * 是否需要重连梯度，默认为true
+	 * Whether gradient reconnection is required, default is true
 	 */
 	isReconnectGradientEnabled?: boolean;
 
 	/**
-	 * 是否需要重连，默认为false
+	 * Whether reconnection is required, default is false
 	 */
 	needReconnect?: boolean;
 
 	/**
-	 * 重连成功通知
+	 * Notification of successful reconnection
 	 */
 	onReconnectSuccess?: () => Promise<void>;
 
 	/**
-	 * 重连失败通知
+	 * Notification of reconnection failure
 	 */
 	onReconnectFailure?: () => void;
 
-	//心跳参数列表
+	// Heartbeat parameter list
 
 	/**
-	 * 心跳发送内容，默认为heartSend
+	 * Heartbeat sending content, default is 'heartSend'
 	 */
 	heartSend?: string;
 
 	/**
-	 * 心跳接收内容，默认为heartGet
+	 * Heartbeat receiving content, default is 'heartGet'
 	 */
 	heartGet?: string;
 
 	/**
-	 * 心跳发送间隔时间，默认为30000
+	 * Heartbeat sending interval time, default is 30000
 	 */
 	heartGapTime?: number;
 
 	/**
-	 * 心跳无响应上限，默认为10
+	 * Maximum number of heartbeat failures, default is 10
 	 */
 	heartFailNum?: number;
 }
 
 /**
- * 心跳
+ * Heartbeat
  */
 export interface IWebSocketHeart {
 	/**
-	 * 心跳发送内容，默认为heartSend
+	 * Heartbeat sending content, default is 'heartSend'
 	 */
 	heartSend: string;
 
 	/**
-	 * 心跳接收内容，默认为heartGet
+	 * Heartbeat receiving content, default is 'heartGet'
 	 */
 	heartGet: string;
 
 	/**
-	 * 心跳发送间隔时间，默认为30000
+	 * Heartbeat sending interval time, default is 30000
 	 */
 	heartGapTime: number;
 
 	/**
-	 * 心跳无响应次数
+	 * Number of heartbeat failures
 	 */
 	failNum: number;
 
 	/**
-	 * 心跳无响应上限，默认为10
+	 * Maximum number of heartbeat failures, default is 10
 	 */
 	heartFailNum: number;
 
 	/**
-	 * WebSocketBean对象
+	 * WebSocketBean object
 	 */
 	websocketbean: IWebSocketBean;
 
 	/**
-	 * 获取心跳信息
+	 * Handle received heartbeat information
 	 * @param ev
 	 * @returns
 	 */
@@ -223,83 +223,83 @@ export interface IWebSocketHeart {
 }
 
 /**
- * 重连
+ * Reconnection
  */
 export interface IWebSocketReconnect {
 	/**
-	 * 开启状态
+	 * Status of whether reconnection is enabled
 	 */
 	status: boolean;
 	/**
-	 * WebSocketBean对象
+	 * WebSocketBean object
 	 */
 	websocketbean: IWebSocketBean;
 
 	/**
-	 * 当前重连次数
+	 * Current number of reconnection attempts
 	 */
 	num: number;
 
 	/**
-	 * 最大重连次数，默认为10次
+	 * Maximum number of reconnection attempts, default is 10
 	 */
 	reconnectMaxNum: number;
 
 	/**
-	 * 重连间隔时间
+	 * Reconnection interval time
 	 */
 	reconnectGapTime: number;
 
 	/**
-	 * 开始尝试重连
+	 * Start attempting reconnection
 	 */
 	start: () => void;
 
 	/**
-	 * 关闭重连
+	 * Stop reconnection
 	 */
 	stop: () => void;
 }
 
 /**
- * 发送数据管理
+ * Data sending management
  */
 export interface IWebSocketSend {
 	/**
-	 * WebSocketBean对象
+	 * WebSocketBean object
 	 */
 	websocketbean: IWebSocketBean;
 
 	/**
-	 * 发送信息前缀
+	 * Prefix for sending messages
 	 */
 	sendPrefix: string;
 
 	/**
-	 * 发送信息后缀
+	 * Suffix for sending messages
 	 */
 	sendSuffix: string;
 
 	/**
-	 * 发送数据
-	 * @param data 数据对象，Object、Array、String
+	 * Send data
+	 * @param data Data object, Object, Array, or String
 	 * @param resend
 	 */
 	send(data: any, resend?: boolean): string | boolean;
 
 	/**
-	 * 销毁需要重发的数据信息
+	 * Destroy the data that needs to be resent
 	 * @param sendId
 	 */
 	offsend: (sendId: string) => void;
 
 	/**
-	 * 通知连接打开
+	 * Notify connection opened
 	 */
 	onopen: () => void;
 
 	/**
-	 * 清空所有缓存数据
+	 * Clear all cached data
 	 */
 	clear: () => void;
 }
