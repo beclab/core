@@ -1,6 +1,6 @@
 {
   "name": "@bytetrade/core",
-  "version": "0.3.83",
+  "version": "0.3.84",
   "description": "didvault core module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

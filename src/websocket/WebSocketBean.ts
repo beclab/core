@@ -33,15 +33,15 @@ export class WebSocketBean implements IWebSocketBean {
 		// Notify connection success or reconnection success
 		this.reconnect.stop();
 
+		// Update status to connected
+		this.status = WebSocketStatusEnum.open;
+
 		// Call lifecycle method
 		if (this.param.onopen) await this.param.onopen();
 
 		if (restart && this.param.onReconnectSuccess) {
 			await this.param.onReconnectSuccess();
 		}
-
-		// Update status to connected
-		this.status = WebSocketStatusEnum.open;
 
 		// Notify to send data
 		this.sendObj.onopen();
