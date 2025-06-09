@@ -220,6 +220,8 @@ export interface IWebSocketHeart {
 	 * @returns
 	 */
 	onmessage: (ev: any) => any;
+
+	heartRes: (ev: any) => boolean;
 }
 
 /**

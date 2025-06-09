@@ -10,6 +10,7 @@ export class WebSocketHeart implements IWebSocketHeart {
 	heartGapTime: number;
 	failNum = 0;
 	heartFailNum: number;
+	heartRes?: (ev: any) => boolean;
 
 	constructor(websocketbean: IWebSocketBean) {
 		this.websocketbean = websocketbean;
@@ -17,6 +18,7 @@ export class WebSocketHeart implements IWebSocketHeart {
 		this.heartGet = this.websocketbean.param.heartGet ?? 'heartGet';
 		this.heartGapTime = this.websocketbean.param.heartGapTime ?? 30000;
 		this.heartFailNum = this.websocketbean.param.heartFailNum ?? 10;
+		this.heartRes = this.websocketbean.param.heartRes;
 	}
 
 	timer: number = null as any;
@@ -52,6 +54,12 @@ export class WebSocketHeart implements IWebSocketHeart {
 	 * @param ev - The received message.
 	 */
 	onmessage = (ev: any) => {
+		if (this.heartRes) {
+			if (this.heartRes(ev)) {
+				this.failNum = 0;
+			}
+			return;
+		}
 		const messagePrefix = this.websocketbean.param.messagePrefix ?? '';
 		const messageSuffix = this.websocketbean.param.messageSuffix ?? '';
 		const heartGetMessage = messagePrefix + this.heartGet + messageSuffix;
