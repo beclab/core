@@ -178,6 +178,8 @@ export interface IWebSocketBeanParam {
 	 * Maximum number of heartbeat failures, default is 10
 	 */
 	heartFailNum?: number;
+
+	heartRes?: (ev: any) => boolean;
 }
 
 /**
@@ -221,7 +223,7 @@ export interface IWebSocketHeart {
 	 */
 	onmessage: (ev: any) => any;
 
-	heartRes: (ev: any) => boolean;
+	heartRes?: (ev: any) => boolean;
 }
 
 /**
