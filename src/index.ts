@@ -7,6 +7,7 @@ export * from './ssi';
 export * from './jwt';
 export * from './name';
 export * from './moniter';
+export * from './monitoring';
 export * from './intent';
 export * from './iframe-post-message';
 export * from './bytetrade-sdk';
