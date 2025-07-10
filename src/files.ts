@@ -1,4 +1,3 @@
-
 export function getFileIcon(fileName: string): string {
 	let suffix = '';
 	let result: string | undefined = '';
@@ -9,11 +8,56 @@ export function getFileIcon(fileName: string): string {
 	if (!suffix) return 'other';
 	suffix = suffix.toLocaleLowerCase();
 
-	const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'heic', 'webp', 'svg', 'tif', 'tiff', 'raw'];
+	const imgList = [
+		'png',
+		'jpg',
+		'jpeg',
+		'bmp',
+		'gif',
+		'heic',
+		'webp',
+		'svg',
+		'tif',
+		'tiff',
+		'raw'
+	];
 	result = imgList.find((item) => item === suffix);
 	if (result) return 'image';
 	// txt
-	const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'];
+	const txtList = [
+		'txt',
+		'py',
+		'c',
+		'cpp',
+		'java',
+		'js',
+		'ts',
+		'php',
+		'sql',
+		'html',
+		'htm',
+		'css',
+		'sh',
+		'swift',
+		'm',
+		'cs',
+		'go',
+		'rb',
+		'pl',
+		'pm',
+		'lua',
+		'm',
+		'vbp',
+		'.for',
+		'.f90',
+		'pas',
+		'dpr',
+		'rs',
+		'asm',
+		'kt',
+		'r',
+		'sb3'
+	];
 	result = txtList.find((item) => item === suffix);
 	if (result) return 'txt';
 	// epub
@@ -50,7 +94,7 @@ export function getFileIcon(fileName: string): string {
 		'avi',
 		'flv',
 		'mov',
-		'm4v',
+		'm4v'
 	];
 	result = videoList.find((item) => item === suffix);
 	if (result) return 'video';
@@ -76,51 +120,51 @@ export function getFileType(fileName: string): string {
 	result = docList.find((item) => item === suffix);
 	if (result) return 'DOC';
 
-  const docxList = ['docx'];
+	const docxList = ['docx'];
 	result = docxList.find((item) => item === suffix);
-  if (result) return 'DOCX';
-  
-  const odtList = ['odt'];
+	if (result) return 'DOCX';
+
+	const odtList = ['odt'];
 	result = odtList.find((item) => item === suffix);
-  if (result) return 'ODT';
-  
-  const pagesList = ['pages'];
+	if (result) return 'ODT';
+
+	const pagesList = ['pages'];
 	result = pagesList.find((item) => item === suffix);
 	if (result) return 'PAGES';
 
-  const pdfList = ['pdf'];
+	const pdfList = ['pdf'];
 	result = pdfList.find((item) => item === suffix);
 	if (result) return 'PDF';
 
-  const pptList = ['ppt', 'pptx'];
+	const pptList = ['ppt', 'pptx'];
 	result = pptList.find((item) => item === suffix);
 	if (result) return 'PPT';
 
-  const xlsList = ['xls', 'xlsx'];
+	const xlsList = ['xls', 'xlsx'];
 	result = xlsList.find((item) => item === suffix);
 	if (result) return 'XLSX';
 
-  const rftList = ['rft'];
+	const rftList = ['rft'];
 	result = rftList.find((item) => item === suffix);
 	if (result) return 'RFT';
 
-  const xmlList = ['xml'];
+	const xmlList = ['xml'];
 	result = xmlList.find((item) => item === suffix);
 	if (result) return 'XML';
 
-  const htmlList = ['xhtml', 'html', 'htm'];
+	const htmlList = ['xhtml', 'html', 'htm'];
 	result = htmlList.find((item) => item === suffix);
 	if (result) return 'HTML';
 
-  const jpgList = ['jpg', 'jpeg', 'jpe', 'jfif', 'jfif-tbnl'];
+	const jpgList = ['jpg', 'jpeg', 'jpe', 'jfif', 'jfif-tbnl'];
 	result = jpgList.find((item) => item === suffix);
 	if (result) return 'JPEG';
 
-  const pngList = ['png'];
+	const pngList = ['png'];
 	result = pngList.find((item) => item === suffix);
 	if (result) return 'PNG';
 
-  const gifList = ['gif'];
+	const gifList = ['gif'];
 	result = gifList.find((item) => item === suffix);
 	if (result) return 'GIF';
 
@@ -128,15 +172,15 @@ export function getFileType(fileName: string): string {
 	result = rawList.find((item) => item === suffix);
 	if (result) return 'RAW';
 
-  const bmpList = ['bmp'];
+	const bmpList = ['bmp'];
 	result = bmpList.find((item) => item === suffix);
 	if (result) return 'BMP';
 
-  const svgList = ['svg'];
+	const svgList = ['svg'];
 	result = svgList.find((item) => item === suffix);
 	if (result) return 'SVG';
 
-  const webpList = ['webp'];
+	const webpList = ['webp'];
 	result = webpList.find((item) => item === suffix);
 	if (result) return 'WEBP';
 
@@ -144,75 +188,109 @@ export function getFileType(fileName: string): string {
 	result = heicList.find((item) => item === suffix);
 	if (result) return 'HEIC';
 
-  const tiffList = ['tif', 'tiff'];
+	const tiffList = ['tif', 'tiff'];
 	result = tiffList.find((item) => item === suffix);
-  if (result) return 'TIFF';
-  
-  const txtList = ['txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'm', 'vbp', '.for', '.f90', 'pas',  'dpr', 'rs', 'asm', 'kt', 'r', 'sb3', 'epub'];
+	if (result) return 'TIFF';
+
+	const txtList = [
+		'txt',
+		'py',
+		'c',
+		'cpp',
+		'java',
+		'js',
+		'ts',
+		'php',
+		'sql',
+		'html',
+		'htm',
+		'css',
+		'sh',
+		'swift',
+		'm',
+		'cs',
+		'go',
+		'rb',
+		'pl',
+		'pm',
+		'lua',
+		'm',
+		'vbp',
+		'.for',
+		'.f90',
+		'pas',
+		'dpr',
+		'rs',
+		'asm',
+		'kt',
+		'r',
+		'sb3',
+		'epub'
+	];
 	result = txtList.find((item) => item === suffix);
 	if (result) return 'TXT';
-	
+
 	const epubList = ['epub'];
 	result = epubList.find((item) => item === suffix);
-  if (result) return 'EPUB';
-  
-  const cssList = ['css', 'scss', 'sass', 'less', 'style'];
+	if (result) return 'EPUB';
+
+	const cssList = ['css', 'scss', 'sass', 'less', 'style'];
 	result = cssList.find((item) => item === suffix);
-  if (result) return 'CSS';
-  
-  const jsList = ['js', 'ts'];
+	if (result) return 'CSS';
+
+	const jsList = ['js', 'ts'];
 	result = jsList.find((item) => item === suffix);
-  if (result) return 'JS';
-  
-  const jsonList = ['json'];
+	if (result) return 'JS';
+
+	const jsonList = ['json'];
 	result = jsonList.find((item) => item === suffix);
-  if (result) return 'JSON';
-  
-  const zipList = ['zip'];
+	if (result) return 'JSON';
+
+	const zipList = ['zip'];
 	result = zipList.find((item) => item === suffix);
 	if (result) return 'ZIP';
 
-  const rarList = ['rar'];
+	const rarList = ['rar'];
 	result = rarList.find((item) => item === suffix);
 	if (result) return 'RAR';
 
-  const zip7List = ['7z'];
+	const zip7List = ['7z'];
 	result = zip7List.find((item) => item === suffix);
-  if (result) return '7-ZIP';
-  
-  const tarList = ['tar'];
+	if (result) return '7-ZIP';
+
+	const tarList = ['tar'];
 	result = tarList.find((item) => item === suffix);
-  if (result) return 'TAR';
-  
-  const gzList = ['gz'];
+	if (result) return 'TAR';
+
+	const gzList = ['gz'];
 	result = gzList.find((item) => item === suffix);
-  if (result) return 'GZIP';
-  
-  const bz2List = ['bz2'];
+	if (result) return 'GZIP';
+
+	const bz2List = ['bz2'];
 	result = bz2List.find((item) => item === suffix);
 	if (result) return 'BZIP2';
 
-  const mp3List = ['mp3'];
+	const mp3List = ['mp3'];
 	result = mp3List.find((item) => item === suffix);
 	if (result) return 'MP3';
-	
+
 	const m4aList = ['m4a'];
 	result = m4aList.find((item) => item === suffix);
-  if (result) return 'M4A';
-  
-  const wavList = ['wav'];
+	if (result) return 'M4A';
+
+	const wavList = ['wav'];
 	result = wavList.find((item) => item === suffix);
-  if (result) return 'WAV';
-  
-  const aacList = ['aac'];
+	if (result) return 'WAV';
+
+	const aacList = ['aac'];
 	result = aacList.find((item) => item === suffix);
-  if (result) return 'AAC';
-  
-  const mp4List = ['mp4', 'm4v'];
+	if (result) return 'AAC';
+
+	const mp4List = ['mp4', 'm4v'];
 	result = mp4List.find((item) => item === suffix);
 	if (result) return 'MP4';
-	
-  const aviList = ['avi', 'mov', 'wmv', 'm2v', 'mkv', 'rmvb', 'flv'];
+
+	const aviList = ['avi', 'mov', 'wmv', 'm2v', 'mkv', 'rmvb', 'flv'];
 	result = aviList.find((item) => item === suffix);
 	if (result) return 'VIDEO';
 
