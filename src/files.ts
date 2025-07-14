@@ -99,7 +99,7 @@ export function getFileIcon(fileName: string): string {
 	result = videoList.find((item) => item === suffix);
 	if (result) return 'video';
 	// audio
-	const audioList = ['mp3', 'wav', 'm4a'];
+	const audioList = ['mp3', 'wav', 'm4a', 'ape', 'flac'];
 	result = audioList.find((item) => item === suffix);
 	if (result) return 'audio';
 	// other
