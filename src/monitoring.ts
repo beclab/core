@@ -1,4 +1,4 @@
-// import { get, isEmpty, last, isArray, isNumber, isString } from 'lodash';
+import { get, isEmpty, last, isArray, isNumber, isString } from 'lodash';
 
 export const getValueByUnit = (
 	num: string,
@@ -125,28 +125,27 @@ const UnitTypes = {
 export type UnitKey = keyof typeof UnitTypes;
 
 export const getSuitableUnit = (value: any, unitType: UnitKey) => {
-	// const config = UnitTypes[unitType];
+	const config = UnitTypes[unitType];
 
-	// if (isEmpty(config)) return '';
+	if (isEmpty(config)) return '';
 
-	// // value can be an array or a single value
-	// const values = isArray(value) ? value : [[0, Number(value)]];
-	// let result = last(config.units);
-	// config.conditions.some((condition, index) => {
-	// 	const triggered = values.some((_value) => {
-	// 		const value = isArray(_value)
-	// 			? (get(_value, '[1]') as number)
-	// 			: Number(_value) || 0;
+	// value can be an array or a single value
+	const values = isArray(value) ? value : [[0, Number(value)]];
+	let result = last(config.units);
+	config.conditions.some((condition, index) => {
+		const triggered = values.some((_value) => {
+			const value = isArray(_value)
+				? (get(_value, '[1]') as number)
+				: Number(_value) || 0;
+			return value >= condition;
+		});
 
-	// 		return value >= condition;
-	// 	});
-
-	// 	if (triggered) {
-	// 		result = config.units[index];
-	// 	}
-	// 	return triggered;
-	// });
-	return '' as any;
+		if (triggered) {
+			result = config.units[index];
+		}
+		return triggered;
+	});
+	return result;
 };
 
 export const getSuitableValue = (
@@ -154,9 +153,9 @@ export const getSuitableValue = (
 	unitType: UnitKey,
 	defaultValue: string | number = 0
 ) => {
-	// if ((!isNumber(value) && !isString(value)) || isNaN(Number(value))) {
-	// 	return defaultValue;
-	// }
+	if ((!isNumber(value) && !isString(value)) || isNaN(Number(value))) {
+		return defaultValue;
+	}
 
 	const unit = getSuitableUnit(value, unitType);
 	const unitText = unit ? ` ${_capitalize(unit)}` : '';
