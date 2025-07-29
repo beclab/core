@@ -11,6 +11,19 @@ export interface TerminusInfo {
 	terminusd: string;
 }
 
+export interface OlaresInfo {
+	olaresName: string;
+	wizardStatus: string;
+	selfhosted: boolean;
+	tailScaleEnable: boolean;
+	osVersion: string;
+	loginBackground: string;
+	avatar: string;
+	olaresId: string;
+	did: string;
+	olaresd: string;
+}
+
 export const DefaultTerminusInfo: TerminusInfo = {
 	terminusName: '',
 	wizardStatus: '',
@@ -22,6 +35,19 @@ export const DefaultTerminusInfo: TerminusInfo = {
 	terminusId: '',
 	did: '',
 	terminusd: '0'
+};
+
+export const DefaultOlaresInfo: OlaresInfo = {
+	olaresName: '',
+	wizardStatus: '',
+	selfhosted: false,
+	tailScaleEnable: false,
+	osVersion: '',
+	avatar: '',
+	loginBackground: '',
+	olaresId: '',
+	did: '',
+	olaresd: '0'
 };
 
 export const compareOlaresVersion = (version0: string, version1: string) => {
@@ -81,3 +107,4 @@ export const compareOlaresVersion = (version0: string, version1: string) => {
 };
 
 export const TerminusDefaultDomain = 'olares.com';
+export const OlaresDefaultDomain = 'olares.com';
