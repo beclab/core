@@ -8,15 +8,9 @@ describe('testing index file', () => {
 		expect(getTerminusNameFromVC('Google', 'pengpeng.a@gmail.com')).toBe(
 			'pengpenga'
 		);
-		expect(getTerminusNameFromVC('Google', 'a.a.a@gmail.com')).toBe(
-			undefined
-		);
-		expect(getTerminusNameFromVC('Google', '.a.a-a.a.@gmail.com')).toBe(
-			'aaaa'
-		);
-		expect(getTerminusNameFromVC('Google', '.a.a-a.a.@gmail.com')).toBe(
-			'aaaa'
-		);
+		expect(getTerminusNameFromVC('Google', 'a.a.a@gmail.com')).toBe(undefined);
+		expect(getTerminusNameFromVC('Google', '.a.a-a.a.@gmail.com')).toBe('aaaa');
+		expect(getTerminusNameFromVC('Google', '.a.a-a.a.@gmail.com')).toBe('aaaa');
 		expect(getTerminusNameFromVC('Google', 'azngpeng.1@gmail.com')).toBe(
 			'azngpeng1'
 		);
