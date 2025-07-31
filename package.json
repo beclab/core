@@ -1,6 +1,6 @@
 {
     "name": "@bytetrade/core",
-    "version": "0.3.94",
+    "version": "0.3.95",
     "description": "didvault core module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
@@ -9,15 +9,16 @@
         "axios": "0.21.4",
         "chai": "^4.3.7",
         "date-fns": "2.22.1",
+        "lodash": "^4.17.21",
         "multiformats": "9.6.4",
+        "semver": "^7.7.2",
         "uuid": "9.0.1",
-        "yaup": "^1.8.0",
-        "lodash": "^4.17.21"
+        "yaup": "^1.8.0"
     },
     "devDependencies": {
         "@swc/core": "^1.3.36",
         "@types/chai": "4.2.18",
-        "@types/jest": "^29.5.12",
+        "@types/jest": "^29.5.14",
         "@types/mocha": "8.2.2",
         "@types/node": "^18.14.0",
         "@typescript-eslint/eslint-plugin": "^5.53.0",
@@ -30,7 +31,7 @@
         "lint-staged": "^13.1.2",
         "mocha": "9.2.2",
         "prettier": "^2.8.4",
-        "ts-jest": "^29.1.2",
+        "ts-jest": "^29.4.0",
         "ts-node": "10.1.0",
         "tsup": "^6.6.3",
         "typescript": "^4.9.5"
