@@ -15,9 +15,6 @@
         "uuid": "9.0.1",
         "yaup": "^1.8.0"
     },
-    "overrides": {
-        "esbuild": "0.17.10"
-    },
     "devDependencies": {
         "@swc/core": "^1.3.36",
         "@types/chai": "4.2.18",
