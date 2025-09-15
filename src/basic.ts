@@ -71,7 +71,7 @@ export const autoFuncWithRetry = async <T>(
 	retryDelay = 5000,
 	delayFunc?: (attempt: number) => number,
 	logger?: {
-		info: (message: any, ...optionalParams: [...any, string?]) => void;
+		log: (message: any, ...optionalParams: [...any, string?]) => void;
 		error: (message: any, ...optionalParams: [...any, string?]) => void;
 	}
 ): Promise<T> => {
@@ -80,12 +80,12 @@ export const autoFuncWithRetry = async <T>(
 		try {
 			attempt++;
 			if (logger) {
-				logger.info(`Attempting to autoFunc (attempt ${attempt})...`);
+				logger.log(`Attempting to autoFunc (attempt ${attempt})...`);
 			}
 
 			const t = await autoFunc();
 			if (logger) {
-				logger.info('Successfully autoFunc');
+				logger.log('Successfully autoFunc');
 			}
 			return t;
 		} catch (error) {
@@ -104,7 +104,7 @@ export const autoFuncWithRetry = async <T>(
 				retryDelayNum = delayFunc(attempt);
 			}
 			if (logger) {
-				logger.info(`Waiting ${retryDelay}ms before next attempt...`);
+				logger.log(`Waiting ${retryDelay}ms before next attempt...`);
 			}
 
 			await new Promise((resolve) => setTimeout(resolve, retryDelayNum));
