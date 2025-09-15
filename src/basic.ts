@@ -65,5 +65,53 @@ export const compareOlaresVersion = (version0: string, version1: string) => {
 	return result;
 };
 
+export const autoFuncWithRetry = async <T>(
+	autoFunc: () => T,
+	maxRetries = -1,
+	retryDelay = 5000,
+	delayFunc?: (attempt: number) => number,
+	logger?: {
+		info: (message: any, ...optionalParams: [...any, string?]) => void;
+		error: (message: any, ...optionalParams: [...any, string?]) => void;
+	}
+): Promise<T> => {
+	let attempt = 0;
+	while (maxRetries === -1 || attempt < maxRetries) {
+		try {
+			attempt++;
+			if (logger) {
+				logger.info(`Attempting to autoFunc (attempt ${attempt})...`);
+			}
+
+			const t = await autoFunc();
+			if (logger) {
+				logger.info('Successfully autoFunc');
+			}
+			return t;
+		} catch (error) {
+			if (logger) {
+				logger.error(`Connection attempt ${attempt} failed:`, error);
+			}
+
+			if (maxRetries !== -1 && attempt >= maxRetries) {
+				if (logger) {
+					logger.error(`Exceeded max retries (${maxRetries}), giving up`);
+				}
+				throw error;
+			}
+			let retryDelayNum = retryDelay;
+			if (delayFunc) {
+				retryDelayNum = delayFunc(attempt);
+			}
+			if (logger) {
+				logger.info(`Waiting ${retryDelay}ms before next attempt...`);
+			}
+
+			await new Promise((resolve) => setTimeout(resolve, retryDelayNum));
+		}
+	}
+	throw new Error('Unexpected exit from connection loop');
+};
+
 export const TerminusDefaultDomain = 'olares.com';
 export const OlaresDefaultDomain = 'olares.com';
