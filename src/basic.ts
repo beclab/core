@@ -104,7 +104,7 @@ export const autoFuncWithRetry = async <T>(
 				retryDelayNum = delayFunc(attempt);
 			}
 			if (logger) {
-				logger.log(`Waiting ${retryDelay}ms before next attempt...`);
+				logger.log(`Waiting ${retryDelayNum}ms before next attempt...`);
 			}
 
 			await new Promise((resolve) => setTimeout(resolve, retryDelayNum));
