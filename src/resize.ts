@@ -4,9 +4,9 @@ export enum DeviceType {
 	DESKTOP = 'desktop'
 }
 
-let deviceChangeCallback:
-	| ((state: { device: DeviceType; isVerticalScreen: boolean }) => void)
-	| null = null;
+let deviceChangeCallbacks: Array<
+	(state: { device: DeviceType; isVerticalScreen: boolean }) => void
+> = [];
 
 const MOBILE_KEYWORDS = [
 	'phone',
@@ -30,6 +30,16 @@ const MOBILE_KEYWORDS = [
 	'windows phone'
 ];
 
+const TABLET_KEYWORDS = [
+	'ipad',
+	'tablet',
+	'kindle',
+	'galaxy tab',
+	'surface',
+	'nexus 7',
+	'nexus 10'
+];
+
 export function useDevice(): {
 	state: { device: DeviceType; isVerticalScreen: boolean };
 	cleanup: () => void;
@@ -44,9 +54,13 @@ export function useDevice(): {
 			newState.isVerticalScreen !== state.isVerticalScreen
 		) {
 			state = newState;
-			if (deviceChangeCallback) {
-				deviceChangeCallback(state);
-			}
+			deviceChangeCallbacks.forEach((callback) => {
+				try {
+					callback(state);
+				} catch (error) {
+					console.error('Device change callback error:', error);
+				}
+			});
 		}
 	};
 
@@ -55,7 +69,8 @@ export function useDevice(): {
 
 	const cleanup = () => {
 		window.removeEventListener('resize', resizeHandler);
-		mediaOrientation.addEventListener('change', resizeHandler);
+		mediaOrientation.removeEventListener('change', resizeHandler);
+		deviceChangeCallbacks = [];
 	};
 
 	return { state, cleanup };
@@ -63,57 +78,46 @@ export function useDevice(): {
 
 function getScreenState(): { device: DeviceType; isVerticalScreen: boolean } {
 	const device = detectDevice();
-	const isVerticalScreen = window.innerHeight > window.innerWidth;
+	const isVerticalScreen = window.matchMedia('(orientation: portrait)').matches;
 	return { device, isVerticalScreen };
 }
 
 function detectDevice(): DeviceType {
-	if (isDesktop()) {
-		const isTouchDevice =
-			'ontouchstart' in window || navigator.maxTouchPoints > 0;
-		if (isTouchDevice) {
-			return DeviceType.TABLET;
-		}
+	const userAgent = navigator.userAgent.toLowerCase();
+	const screenWidth = window.screen.width;
+	const viewportWidth = window.innerWidth;
 
-		return DeviceType.DESKTOP;
-	}
-
-	if (isSamsungDevice()) {
-		return DeviceType.MOBILE;
-	}
-
-	const ratio =
-		screen.height > screen.width
-			? screen.height / screen.width
-			: screen.width / screen.height;
-
-	if (ratio >= 1.3 && ratio <= 1.6) {
+	if (TABLET_KEYWORDS.some((keyword) => userAgent.includes(keyword))) {
 		return DeviceType.TABLET;
 	}
 
-	return DeviceType.MOBILE;
-}
-
-function isSamsungDevice() {
-	const userAgent = navigator.userAgent.toLowerCase();
-	const isAndroid = /android/i.test(userAgent);
-	const isSamsung = /samsung|sm-|gt-/i.test(userAgent);
-	return isAndroid && isSamsung;
-}
-
-function isDesktop(): boolean {
-	const userAgent = navigator.userAgent.toLowerCase();
-	const hasKeywords = MOBILE_KEYWORDS.some((keyword) =>
-		userAgent.includes(keyword)
-	);
-	if (hasKeywords) {
-		return false;
+	if (MOBILE_KEYWORDS.some((keyword) => userAgent.includes(keyword))) {
+		return screenWidth > 768 ? DeviceType.TABLET : DeviceType.MOBILE;
 	}
-	return true;
+
+	const isTouchDevice =
+		'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+	if (viewportWidth < 768) {
+		return DeviceType.MOBILE;
+	}
+
+	if (isTouchDevice && viewportWidth >= 768 && viewportWidth <= 1280) {
+		return DeviceType.TABLET;
+	}
+
+	return DeviceType.DESKTOP;
 }
 
 export function onDeviceChange(
 	callback: (state: { device: DeviceType; isVerticalScreen: boolean }) => void
 ) {
-	deviceChangeCallback = callback;
+	deviceChangeCallbacks.push(callback);
+	callback(getScreenState());
+
+	return () => {
+		deviceChangeCallbacks = deviceChangeCallbacks.filter(
+			(cb) => cb !== callback
+		);
+	};
 }
