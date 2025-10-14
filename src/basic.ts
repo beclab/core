@@ -12,16 +12,9 @@ export interface TerminusInfo {
 	terminusd: string;
 }
 
-export interface OlaresInfo {
+export interface OlaresInfo extends TerminusInfo {
 	olaresName: string;
-	wizardStatus: string;
-	selfhosted: boolean;
-	tailScaleEnable: boolean;
-	osVersion: string;
-	loginBackground: string;
-	avatar: string;
 	olaresId: string;
-	did: string;
 	olaresd: string;
 }
 
@@ -48,7 +41,10 @@ export const DefaultOlaresInfo: OlaresInfo = {
 	loginBackground: '',
 	olaresId: '',
 	did: '',
-	olaresd: '0'
+	olaresd: '0',
+	terminusd: '0',
+	terminusName: '',
+	terminusId: ''
 };
 
 export const compareOlaresVersion = (version0: string, version1: string) => {
