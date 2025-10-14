@@ -20,3 +20,4 @@ export * from './files';
 export * from './integration';
 export * from './resize';
 export * from './check-network';
+export * from './global';
