@@ -1,41 +1,53 @@
+enum SUPPORT_ENVIRONMENT {
+	EN = 'en',
+	CN = 'cn'
+}
+
 const DID_GATE_URL = {
-	en: 'https://api.olares.com/did',
-	cn: 'https://api.olares.cn/did'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/did',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/did'
 };
 
 const OLARES_SPACE_URL = {
-	en: 'https://api.olares.com/space',
-	cn: 'https://api.olares.cn/space'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/space',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/space'
 };
 
 const FIREBASE_PUSH_URL = {
-	en: 'https://api.olares.com/push',
-	cn: 'https://api.olares.cn/push'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/push',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/push'
 };
 
 const FRP_LIST_URL = {
-	en: 'https://api.olares.com/frp',
-	cn: 'https://api.olares.cn/frp'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/frp',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/frp'
 };
 
 const TAILSCALE_CONTROLPLANE_URL = {
-	en: 'https://api.olares.com/controlplane',
-	cn: 'https://api.olares.cn/controlplane'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/controlplane',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/controlplane'
 };
 
 const DOWNLOAD_CDN_URL = {
-	en: 'https://cdn.olares.com',
-	cn: 'https://cdn.olares.cn'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://cdn.olares.com',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://cdn.olares.cn'
 };
 
 const VC = {
-	en: 'https://api.olares.com/vc',
-	cn: 'https://api.olares.cn/vc'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/vc',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/vc'
 };
 
 const MARKET_PROVIDER = {
-	en: 'https://api.olares.com/market',
-	cn: 'https://api.olares.cn/market'
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/market',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/market'
+};
+
+const userNameToEnvironment = (name: string) => {
+	if (name.endsWith('olares.cn')) {
+		return SUPPORT_ENVIRONMENT.CN;
+	}
+	return SUPPORT_ENVIRONMENT.EN;
 };
 
 export const GolbalHost = {
@@ -46,5 +58,7 @@ export const GolbalHost = {
 	FIREBASE_PUSH_URL,
 	OLARES_SPACE_URL,
 	DID_GATE_URL,
-	MARKET_PROVIDER
+	MARKET_PROVIDER,
+	SUPPORT_ENVIRONMENT,
+	userNameToEnvironment
 };
