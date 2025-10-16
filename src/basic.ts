@@ -16,6 +16,9 @@ export interface OlaresInfo extends TerminusInfo {
 	olaresName: string;
 	olaresId: string;
 	olaresd: string;
+
+	// selfhosted
+	enableReverseProxy: boolean;
 }
 
 export const DefaultTerminusInfo: TerminusInfo = {
@@ -44,7 +47,8 @@ export const DefaultOlaresInfo: OlaresInfo = {
 	olaresd: '0',
 	terminusd: '0',
 	terminusName: '',
-	terminusId: ''
+	terminusId: '',
+	enableReverseProxy: false
 };
 
 export const compareOlaresVersion = (version0: string, version1: string) => {
