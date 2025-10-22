@@ -13,8 +13,8 @@ export interface TerminusInfo {
 }
 
 export interface OlaresInfo extends TerminusInfo {
-	olaresName: string;
 	olaresId: string;
+	id: string;
 	olaresd: string;
 
 	// selfhosted
@@ -35,14 +35,14 @@ export const DefaultTerminusInfo: TerminusInfo = {
 };
 
 export const DefaultOlaresInfo: OlaresInfo = {
-	olaresName: '',
+	olaresId: '',
 	wizardStatus: '',
 	selfhosted: false,
 	tailScaleEnable: false,
 	osVersion: '',
 	avatar: '',
 	loginBackground: '',
-	olaresId: '',
+	id: '',
 	did: '',
 	olaresd: '0',
 	terminusd: '0',
