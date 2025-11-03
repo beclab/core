@@ -1,9 +1,49 @@
 const FILE_ICON_CONFIG: { [key: string]: string[] } = {
-	image: ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'heic', 'webp', 'svg', 'tif', 'tiff', 'raw'],
+	image: [
+		'png',
+		'jpg',
+		'jpeg',
+		'bmp',
+		'gif',
+		'heic',
+		'webp',
+		'svg',
+		'tif',
+		'tiff',
+		'raw'
+	],
 	txt: [
-		'txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css', 
-		'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'vbp', '.for', '.f90', 
-		'pas', 'dpr', 'rs', 'asm', 'kt', 'r', 'sb3'
+		'txt',
+		'py',
+		'c',
+		'cpp',
+		'java',
+		'js',
+		'ts',
+		'php',
+		'sql',
+		'html',
+		'htm',
+		'css',
+		'sh',
+		'swift',
+		'm',
+		'cs',
+		'go',
+		'rb',
+		'pl',
+		'pm',
+		'lua',
+		'vbp',
+		'.for',
+		'.f90',
+		'pas',
+		'dpr',
+		'rs',
+		'asm',
+		'kt',
+		'r',
+		'sb3'
 	],
 	epub: ['epub'],
 	excel: ['xls', 'xlsx'],
@@ -11,17 +51,28 @@ const FILE_ICON_CONFIG: { [key: string]: string[] } = {
 	pdf: ['pdf'],
 	ppt: ['ppt', 'pptx'],
 	zip: ['rar', 'zip', '7z'],
-	video: ['mp4', 'm2v', 'mkv', 'rmvb', 'wmv', 'avi', 'flv', 'mov', 'm4v', 'ape'],
+	video: [
+		'mp4',
+		'm2v',
+		'mkv',
+		'rmvb',
+		'wmv',
+		'avi',
+		'flv',
+		'mov',
+		'm4v',
+		'ape'
+	],
 	audio: ['mp3', 'wav', 'm4a', 'flac']
 };
 
 export function getFileIcon(fileName: string): string {
 	if (!fileName) return 'other';
-	
+
 	// 提取文件扩展名并转为小写
 	const extension = fileName.split('.').pop()?.toLowerCase();
 	if (!extension) return 'other';
-	
+
 	// 遍历配置查找匹配的图标类型
 	for (const iconType in FILE_ICON_CONFIG) {
 		const extensions = FILE_ICON_CONFIG[iconType];
@@ -29,7 +80,7 @@ export function getFileIcon(fileName: string): string {
 			return iconType;
 		}
 	}
-	
+
 	return 'other';
 }
 
@@ -54,9 +105,38 @@ const FILE_TYPE_CONFIG: { [key: string]: string[] } = {
 	HEIC: ['heic'],
 	TIFF: ['tif', 'tiff'],
 	TXT: [
-		'txt', 'py', 'c', 'cpp', 'java', 'js', 'ts', 'php', 'sql', 'html', 'htm', 'css',
-		'sh', 'swift', 'm', 'cs', 'go', 'rb', 'pl', 'pm', 'lua', 'vbp', '.for', '.f90',
-		'pas', 'dpr', 'rs', 'asm', 'kt', 'r', 'sb3', 'epub'
+		'txt',
+		'py',
+		'c',
+		'cpp',
+		'java',
+		'js',
+		'ts',
+		'php',
+		'sql',
+		'html',
+		'htm',
+		'css',
+		'sh',
+		'swift',
+		'm',
+		'cs',
+		'go',
+		'rb',
+		'pl',
+		'pm',
+		'lua',
+		'vbp',
+		'.for',
+		'.f90',
+		'pas',
+		'dpr',
+		'rs',
+		'asm',
+		'kt',
+		'r',
+		'sb3',
+		'epub'
 	],
 	EPUB: ['epub'],
 	CSS: ['css', 'scss', 'sass', 'less', 'style'],
@@ -78,11 +158,11 @@ const FILE_TYPE_CONFIG: { [key: string]: string[] } = {
 
 export function getFileType(fileName: string): string {
 	if (!fileName) return 'blob';
-	
+
 	// 提取文件扩展名并转为小写
 	const extension = fileName.split('.').pop()?.toLowerCase();
 	if (!extension) return 'blob';
-	
+
 	// 遍历配置查找匹配的文件类型
 	for (const fileType in FILE_TYPE_CONFIG) {
 		const extensions = FILE_TYPE_CONFIG[fileType];
@@ -90,6 +170,6 @@ export function getFileType(fileName: string): string {
 			return fileType;
 		}
 	}
-	
+
 	return 'blob';
 }
