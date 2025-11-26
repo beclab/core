@@ -36,4 +36,5 @@ export interface TerminusApp {
 	entrances: TerminusEntrance[];
 	ports: TerminusPorts[];
 	requiredGpu: string;
+	sharedEntrances?: TerminusEntrance[];
 }
