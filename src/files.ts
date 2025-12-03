@@ -65,7 +65,7 @@ const FILE_ICON_CONFIG: { [key: string]: string[] } = {
 		'webm',
 		'vob',
 		'mpg',
-		'3pg',
+		'3gp',
 		'rm',
 		'ogg'
 	],
@@ -170,7 +170,7 @@ const FILE_TYPE_CONFIG: { [key: string]: string[] } = {
 		'webm',
 		'vob',
 		'mpg',
-		'3pg',
+		'3gp',
 		'rm',
 		'ogg'
 	]
