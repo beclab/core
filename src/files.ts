@@ -62,7 +62,12 @@ const FILE_ICON_CONFIG: { [key: string]: string[] } = {
 		'mov',
 		'm4v',
 		'ape',
-		'webm'
+		'webm',
+		'vob',
+		'mpg',
+		'3pg',
+		'rm',
+		'ogg'
 	],
 	audio: ['mp3', 'wav', 'm4a', 'flac']
 };
@@ -154,7 +159,21 @@ const FILE_TYPE_CONFIG: { [key: string]: string[] } = {
 	WAV: ['wav'],
 	AAC: ['aac'],
 	MP4: ['mp4', 'm4v'],
-	VIDEO: ['avi', 'mov', 'wmv', 'm2v', 'mkv', 'rmvb', 'flv', 'webm']
+	VIDEO: [
+		'avi',
+		'mov',
+		'wmv',
+		'm2v',
+		'mkv',
+		'rmvb',
+		'flv',
+		'webm',
+		'vob',
+		'mpg',
+		'3pg',
+		'rm',
+		'ogg'
+	]
 };
 
 export function getFileType(fileName: string): string {
