@@ -70,10 +70,9 @@ const FILE_ICON_CONFIG: { [key: string]: string[] } = {
 		'vob',
 		'mpg',
 		'3gp',
-		'rm',
-		'ogg'
+		'rm'
 	],
-	audio: ['mp3', 'wav', 'm4a', 'flac']
+	audio: ['mp3', 'wav', 'm4a', 'flac', 'ogg', 'aac']
 };
 
 export function getFileIcon(fileName: string): string {
@@ -178,7 +177,8 @@ const FILE_TYPE_CONFIG: { [key: string]: string[] } = {
 		'mpg',
 		'3gp',
 		'rm',
-		'ogg'
+		'ogg',
+		'aac'
 	]
 };
 
