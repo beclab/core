@@ -43,6 +43,11 @@ const MARKET_PROVIDER = {
 	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/market'
 };
 
+const OLARES_UPGRADE = {
+	[SUPPORT_ENVIRONMENT.EN]: 'https://api.olares.com/upgrade',
+	[SUPPORT_ENVIRONMENT.CN]: 'https://api.olares.cn/upgrade'
+};
+
 const userNameToEnvironment = (name: string) => {
 	if (name.endsWith('olares.cn')) {
 		return SUPPORT_ENVIRONMENT.CN;
@@ -59,6 +64,7 @@ export const GolbalHost = {
 	OLARES_SPACE_URL,
 	DID_GATE_URL,
 	MARKET_PROVIDER,
+	OLARES_UPGRADE,
 	SUPPORT_ENVIRONMENT,
 	userNameToEnvironment
 };

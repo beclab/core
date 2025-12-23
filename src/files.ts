@@ -43,7 +43,11 @@ const FILE_ICON_CONFIG: { [key: string]: string[] } = {
 		'asm',
 		'kt',
 		'r',
-		'sb3'
+		'sb3',
+		'xml',
+		'yaml',
+		'config',
+		'json'
 	],
 	epub: ['epub'],
 	excel: ['xls', 'xlsx'],
@@ -142,7 +146,9 @@ const FILE_TYPE_CONFIG: { [key: string]: string[] } = {
 		'kt',
 		'r',
 		'sb3',
-		'epub'
+		'epub',
+		'config',
+		'yaml'
 	],
 	EPUB: ['epub'],
 	CSS: ['css', 'scss', 'sass', 'less', 'style'],
