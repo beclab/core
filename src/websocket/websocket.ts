@@ -180,6 +180,8 @@ export interface IWebSocketBeanParam {
 	heartFailNum?: number;
 
 	heartRes?: (ev: any) => boolean;
+
+	protocols?: string | string[];
 }
 
 /**

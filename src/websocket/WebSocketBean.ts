@@ -72,7 +72,7 @@ export class WebSocketBean implements IWebSocketBean {
 		else param = this.param;
 
 		// Create connection
-		this.websocket = new WebSocket(param.url);
+		this.websocket = new WebSocket(param.url, param.protocols);
 
 		// Update status to loading
 		this.status = WebSocketStatusEnum.load;
