@@ -26,6 +26,7 @@ export interface TerminusApp {
 	isClusterScoped: boolean;
 	isSysApp: boolean;
 	name: string;
+	rawAppName: string;
 	namespace?: string;
 	target: string;
 	owner?: string;
