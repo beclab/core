@@ -16,7 +16,7 @@ export interface OlaresInfo extends TerminusInfo {
 	olaresId: string;
 	id: string;
 	olaresd: string;
-
+	style: string;
 	// selfhosted
 	enableReverseProxy: boolean;
 }
