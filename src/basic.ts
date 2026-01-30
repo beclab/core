@@ -42,6 +42,7 @@ export const DefaultOlaresInfo: OlaresInfo = {
 	osVersion: '',
 	avatar: '',
 	loginBackground: '',
+	style: '',
 	id: '',
 	did: '',
 	olaresd: '0',
